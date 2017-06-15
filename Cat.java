@@ -22,35 +22,38 @@ public class Cat {
 
 	}
 
-	public static int getId() {
+	public int getId() {
 		return id;
 	}
 
-	public static void setId(int id) {
-		Cat.id = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public static float getCost() {
+	public float getCost() {
 		return cost;
 	}
 
-	public static void setCost(float cost) {
-		Cat.cost = cost;
+	public void setCost(float cost) {
+		if (cost < 0) {
+			throw new IllegalArgumentException("Cost must be positive");
+		}
+		this.cost = cost;
 	}
 
-	public static String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public static void setName(String name) {
-		Cat.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public static boolean isRented() {
+	public boolean isRented() {
 		return rented;
 	}
 
-	public static void setRented(boolean rented) {
-		Cat.rented = rented;
+	public void setRented(boolean rented) {
+		this.rented = rented;
 	}
 }
