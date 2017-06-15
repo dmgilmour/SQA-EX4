@@ -11,4 +11,28 @@ public class Customer {
 		this.money = money;
 		rentedCat = null;
 	}
+
+	public static String getName() {
+		return name;
+	}
+
+	public static void setName(String name) {
+		Customer.name = name;
+	}
+
+	public static float getMoney() {
+		return money;
+	}
+
+	public static void setMoney(float money) {
+		Customer.money = money;
+	}
+
+	public static Cat getRentedCat() {
+		return rentedCat;
+	}
+
+	public static void setRentedCat(Cat rentedCat) {
+		Customer.rentedCat = rentedCat;
+	}
 }
