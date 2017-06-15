@@ -5,11 +5,27 @@ public class RentAClass {
 	Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
+	
+
+	int chosenOption = 0;
+	Cat chosenCat;
+	while (chosenOption != 4) {
+		chosenOption = promptOption();
+		switch (chosenOption) {
+			case 1:
+				printAvailableCats();
+				break;
+			case 2:
+				chosenCat = promptDesiredCat(cats);
+				chosenCustomer = promptCustomer(customers);
+				rentCats(chosenCat, chosenCustomer);
+				break;
+			case 3:
 		
 
 	}
 
-	public int promptDesiredCat(ArrayList<Cat> cats) {
+	public int promptRentCat(ArrayList<Cat> cats) {
 		int desiredCat = 0;
 		while (desiredCat == 0) {
 			System.out.print("Rent which cat? > ");
@@ -17,7 +33,7 @@ public class RentAClass {
 				desiredCat = Integer.parseInt(input.next());
 				for (givenCat : cats) {
 					if (desiredCat == givenCat.id) {
-						if (!givenCat.id.rented) {
+						if (!givenCat.rented) {
 							return desiredCat;
 						} else {
 							System.out.println("Sorry, " + givenCat.name + " is not here!");
@@ -31,18 +47,18 @@ public class RentAClass {
 		}
 	}
 
-	public int promptDesiredCat(ArrayList<Cat> cats) {
+	public int promptReturnCat(ArrayList<Cat> cats) {
 		int desiredCat = 0;
 		while (desiredCat == 0) {
-			System.out.print("Rent which cat? > ");
+			System.out.print("Return which cat? > ");
 			try {
 				desiredCat = Integer.parseInt(input.next());
 				for (givenCat : cats) {
 					if (desiredCat == givenCat.id) {
-						if (!givenCat.id.rented) {
+						if (givenCat.rented) {
 							return desiredCat;
 						} else {
-							System.out.println("Sorry, " + givenCat.name + " is not here!");
+							System.out.println(givenCat.name + " hasn't been rented!");
 						}
 					}
 				}
