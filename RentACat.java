@@ -31,7 +31,6 @@ public class RentACat {
 					break;
 				case 3:
 					chosenCat = promptReturnCat(cats);
-					chosenCustomer = promptCustomer(customers);
 					returnCats(chosenCat, chosenCustomer);
 					break;
 				case 4:
@@ -40,12 +39,20 @@ public class RentACat {
 		}
 	}
 
-	private static void returnCats(Cat chosenCat, Customer chosenCustomer) {
-
+	private static void returnCats(Cat chosenCat) {
+		Customer chosenCustomer = chosenCat.getRentingCustomer();
+		System.println(chosenCustomer.getName() + " paid $" + chosenCat.getCost);
+		chosenCat.setRentingCustomer = null;
+		chosenCat.setRented(false);
+		chosenCustomer.setRentedCat(null);
+		System.out.println("Welcome back, " + chosenCat.getName() + "!");
 	}
 
 	private static void rentCats(Cat chosenCat, Customer chosenCustomer) {
-
+		chosenCat.setRented(true);
+		chosenCustomer.setRentedCat(chosenCat);
+		chosenCat.setRentingCustomer(chosenCustomer);
+		System.out.println(chosenCat.getName() + " has been rented to Customer " + chosenCustomer.getName());
 	}
 
 	private static Customer promptCustomer(ArrayList<Customer> customers) {
