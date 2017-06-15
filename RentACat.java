@@ -32,11 +32,11 @@ public class RentAClass {
 			try {
 				desiredCat = Integer.parseInt(input.next());
 				for (givenCat : cats) {
-					if (desiredCat == givenCat.id) {
-						if (!givenCat.rented) {
+					if (desiredCat == givenCat.getId()) {
+						if (!givenCat.getRented()) {
 							return desiredCat;
 						} else {
-							System.out.println("Sorry, " + givenCat.name + " is not here!");
+							System.out.println("Sorry, " + givenCat.getName() + " is not here!");
 						}
 					}
 				}
@@ -54,11 +54,11 @@ public class RentAClass {
 			try {
 				desiredCat = Integer.parseInt(input.next());
 				for (givenCat : cats) {
-					if (desiredCat == givenCat.id) {
-						if (givenCat.rented) {
+					if (desiredCat == givenCat.getId()) {
+						if (givenCat.getRented()) {
 							return desiredCat;
 						} else {
-							System.out.println(givenCat.name + " hasn't been rented!");
+							System.out.println(givenCat.getName() + " hasn't been rented!");
 						}
 					}
 				}
