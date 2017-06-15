@@ -32,8 +32,7 @@ public class RentACat {
 						break;
 					case 3:
 						chosenCat = promptReturnCat(cats);
-						chosenCustomer = promptCustomer(customers);
-						returnCats(chosenCat, chosenCustomer);
+						returnCats(chosenCat);
 						break;
 					case 4:
 						System.out.println("Closing up shop for the day");
@@ -43,20 +42,25 @@ public class RentACat {
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid option");
+
 			}
 		}
 	}
 
-	public static void returnCats(Cat chosenCat, Customer chosenCustomer) {
-
-
-
+	private static void returnCats(Cat chosenCat) {
+		Customer chosenCustomer = chosenCat.getRentingCustomer();
+		System.out.println(chosenCustomer.getName() + " paid $" + chosenCat.getCost());
+		chosenCat.setRentingCustomer(null);
+		chosenCat.setRented(false);
+		chosenCustomer.setRentedCat(null);
+		System.out.println("Welcome back, " + chosenCat.getName() + "!");
 	}
 
-	public static void rentCats(Cat chosenCat, Customer chosenCustomer) {
-
-
-
+	private static void rentCats(Cat chosenCat, Customer chosenCustomer) {
+		chosenCat.setRented(true);
+		chosenCustomer.setRentedCat(chosenCat);
+		chosenCat.setRentingCustomer(chosenCustomer);
+		System.out.println(chosenCat.getName() + " has been rented to Customer " + chosenCustomer.getName());
 	}
 
 	public static Cat promptRentCat(ArrayList<Cat> cats) {

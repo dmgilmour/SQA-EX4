@@ -6,6 +6,7 @@ public class Cat {
 	private float cost;
 	private String name;
 	private boolean rented;
+	private Customer rentingCustomer;
 
 	public Cat(int id, float cost, String name) {
 	
@@ -13,6 +14,7 @@ public class Cat {
 		this.cost = cost;
 		this.name = name;
 		rented = false;
+		rentingCustomer = null;
 
 	}
 
@@ -55,5 +57,13 @@ public class Cat {
 
 	public void setRented(boolean rented) {
 		this.rented = rented;
+	}
+
+	public void setRentingCustomer(Customer rentingCustomer) {
+		this.rentingCustomer = rentingCustomer;
+	}
+
+	public Customer getRentingCustomer() {
+		return rentingCustomer;
 	}
 }

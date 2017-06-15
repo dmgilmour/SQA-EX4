@@ -2,9 +2,10 @@
 
 public class Customer {
 
-	private static String name;
-	private static float money;
-	private static Cat rentedCat;
+	private int id;
+	private String name;
+	private float money;
+	private Cat rentedCat;
 
 	public Customer(String name, float money) {
 		this.name = name;
@@ -12,27 +13,35 @@ public class Customer {
 		rentedCat = null;
 	}
 
-	public static String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public static void setName(String name) {
-		Customer.name = name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public static float getMoney() {
+	public float getMoney() {
 		return money;
 	}
 
-	public static void setMoney(float money) {
-		Customer.money = money;
+	public void setMoney(float money) {
+		this.money = money;
 	}
 
-	public static Cat getRentedCat() {
+	public Cat getRentedCat() {
 		return rentedCat;
 	}
 
-	public static void setRentedCat(Cat rentedCat) {
-		Customer.rentedCat = rentedCat;
+	public void setRentedCat(Cat rentedCat) {
+		this.rentedCat = rentedCat;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
