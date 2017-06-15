@@ -13,4 +13,12 @@ public class RentACatTest {
 
     // rentCats:  null cat, null customer, invalid cat, invalid customer, already rented cat
 
+    // promptRentCat:
+
+    // promptReturnCat:
+
+    // printAvalibleCats:
+
+    // promptCustomer:
+
 }

@@ -1,6 +1,4 @@
-import java.util.*;
-
-public class Cat {
+public class Cat implements Identifiable {
 
 	private int id;
 	private float cost;

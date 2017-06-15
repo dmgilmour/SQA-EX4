@@ -23,15 +23,15 @@ public class RentACat {
 				chosenOption = Integer.parseInt(input.next());
 				switch (chosenOption) {
 					case 1:
-						printAvailableCats(cats);
+						System.out.print(getAvailableCatsString(cats));
 						break;
 					case 2:
-						chosenCustomer = promptCustomer(customers);
-						chosenCat = promptRentCat(cats);
+						chosenCustomer = promptCustomer(customers, input);
+						chosenCat = promptRentCat(cats, input);
 						rentCats(chosenCat, chosenCustomer);
 						break;
 					case 3:
-						chosenCat = promptReturnCat(cats);
+						chosenCat = promptReturnCat(cats, input);
 						returnCats(chosenCat);
 						break;
 					case 4:
@@ -42,7 +42,6 @@ public class RentACat {
 				}
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid option");
-
 			}
 		}
 	}
@@ -63,84 +62,80 @@ public class RentACat {
 		System.out.println(chosenCat.getName() + " has been rented to Customer " + chosenCustomer.getName());
 	}
 
-	public static Cat promptRentCat(ArrayList<Cat> cats) {
-		int desiredCat = 0;
-		while (desiredCat == 0) {
-			System.out.print("Rent which cat? > ");
-			try {
-				desiredCat = Integer.parseInt(input.next());
-				for (Cat givenCat : cats) {
-					if (desiredCat == givenCat.getId()) {
-						if (!givenCat.isRented()) {
-							return givenCat;
-						} else {
-							System.out.println("Sorry, " + givenCat.getName() + " is not here!");
-						}
-					}
-				}
-				System.out.println("Invalid Cat ID");
-			} catch (NumberFormatException e) {
-				System.out.println("Invalid Cat ID");
-			}
-		}
+	public static Cat promptRentCat(ArrayList<Cat> cats, Scanner input) {
 
-		throw new IllegalStateException("Should not get outside prompt loop");
+		return (Cat) promptObjectLoop(cats,
+				option -> true,
+				input,
+				"Rent which cat? > ",
+				"Invalid cat id",
+				"Invalid cat id");
 
 	}
 
-	public static Cat promptReturnCat(ArrayList<Cat> cats) {
-		int desiredCat = 0;
-		while (desiredCat == 0) {
-			System.out.print("Return which cat? > ");
-			try {
-				desiredCat = Integer.parseInt(input.next());
-				for (Cat givenCat : cats) {
-					if (desiredCat == givenCat.getId()) {
-						if (givenCat.isRented()) {
-							return givenCat;
-						} else {
-							System.out.println(givenCat.getName() + " hasn't been rented!");
-						}
-					}
-				}
-				System.out.println("Invalid Cat ID");
-			} catch (NumberFormatException e) {
-				System.out.println("Invalid Cat ID");
-			}
-		}
+	public static Cat promptReturnCat(ArrayList<Cat> cats, Scanner input) {
 
-		throw new IllegalStateException("Should not get outside prompt loop");
+		return (Cat) promptObjectLoop(cats,
+				option -> ((Cat) option).isRented(),
+				input,
+				"Return which cat? > ",
+				"That cat hasn't been rented!",
+				"Invalid cat id");
 
 	}
 
-	public static void printAvailableCats(ArrayList<Cat> cats) {
-		System.out.println("Cats for Rent");
+	public static Customer promptCustomer(ArrayList<Customer> customers, Scanner input) {
+
+		return (Customer) promptObjectLoop(customers,
+				option -> true,
+				input,
+				"Customer ID > ",
+				"Invalid Customer ID",
+				"Invalid Customer ID");
+
+	}
+
+	public static String getAvailableCatsString(ArrayList<Cat> cats) {
+
+		String output = "Cats for Rent\n";
 		for (Cat givenCat : cats) {
 			if (!givenCat.isRented()) {
-				System.out.println(givenCat.toString());
+				output = output + givenCat.toString() + "\n";
 			}
 		}
+		return output;
+
 	}
 
-	public static Customer promptCustomer(ArrayList<Customer> customers) {
+	public static Identifiable promptObjectLoop(ArrayList<? extends Identifiable> objects, ValidOptionDecider decider, Scanner input, String prompt, String invalid, String error) {
 
-		int desiredCustomer = 0;
-		while (desiredCustomer == 0) {
-			System.out.println("Customer ID > ");
+		int desired = -1;
+		while (desired == -1) {
+			System.out.println(prompt);
 			try {
-				desiredCustomer = Integer.parseInt(input.next());
-				for (Customer givenCustomer : customers) {
-					if (desiredCustomer == givenCustomer.getId()) {
-						return givenCustomer;
+				desired = Integer.parseInt(input.next());
+				for (Identifiable item : objects) {
+					if (desired == item.getId()) {
+						if (decider.isValidOption(item)) {
+							return item;
+						} else {
+							System.out.println(invalid);
+						}
 					}
 				}
-				System.out.println("Invalid Customer ID");
+				System.out.println(error);
 			} catch (NumberFormatException e) {
-				System.out.println("Invalid Customer ID");
+				System.out.println(error);
 			}
 		}
 
-		throw new IllegalStateException("Should not get outside prompt loop");
+		throw new IllegalStateException("Should never get outside the prompt loop!");
+
+	}
+
+	public interface ValidOptionDecider {
+
+		boolean isValidOption(Identifiable option);
 
 	}
 

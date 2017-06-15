@@ -1,6 +1,4 @@
-
-
-public class Customer {
+public class Customer implements Identifiable {
 
 	private int id;
 	private String name;
