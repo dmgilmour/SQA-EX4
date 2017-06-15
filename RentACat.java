@@ -7,13 +7,13 @@ public class RentAClass {
 	public static void main(String[] args) {
 
 		ArrayList<Cat> cats = new ArrayList<Cat>();
-		cats.add(new Cat(1, 150, "John");
-		cats.add(new Cat(2, 200, "Jane");
+		cats.add(new Cat(1, 150, "John"));
+		cats.add(new Cat(2, 200, "Jane"));
 
 		ArrayList<Customer> customers = new ArrayList<Customer>();
-		customers.add(new Customer(111, "Ira Glass");
-		customers.add(new Customer(123, "Lackshmi Singh");
-		customers.add(new Customer(234, "Ari Shapiro");
+		customers.add(new Customer(111, "Ira Glass"));
+		customers.add(new Customer(123, "Lackshmi Singh"));
+		customers.add(new Customer(234, "Ari Shapiro"));
 	
 
 		int chosenOption = 0;
@@ -93,6 +93,25 @@ public class RentAClass {
 			}
 		}
 	}
+
+	public Customer promptCustomer(ArrayList<Customer> customers) {
+		int desiredCustomer = 0;
+		while (customer == 0) {
+			System.out.println("Customer ID > ");
+			try {
+				desiredCustomer = Integer.parseInt(input.next());
+				for (givenCustomer : customers) {
+					if (desiredCustomer == givenCustomer.getId()) {
+						return givenCustomer;
+					}
+				}
+				System.out.println("Invalid Customer ID");
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid Customer ID");
+			}
+		}
+	}
+			
 
 		
 }
