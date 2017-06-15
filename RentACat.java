@@ -1,19 +1,18 @@
 import java.util.*;
 
-public class RentAClass {
+public class RentACat {
 
-	Scanner input = new Scanner(System.in);
+	static Scanner input = new Scanner(System.in);
 
 	public static void main(String[] args) {
-
-		ArrayList<Cat> cats = new ArrayList<Cat>();
+		ArrayList<Cat> cats = new ArrayList<>();
 		cats.add(new Cat(1, 150, "John"));
 		cats.add(new Cat(2, 200, "Jane"));
 
-		ArrayList<Customer> customers = new ArrayList<Customer>();
-		customers.add(new Customer(111, "Ira Glass"));
-		customers.add(new Customer(123, "Lackshmi Singh"));
-		customers.add(new Customer(234, "Ari Shapiro"));
+		ArrayList<Customer> customers = new ArrayList<>();
+		customers.add(new Customer("Ira Glass", 111));
+		customers.add(new Customer("Lackshmi Singh", 123));
+		customers.add(new Customer("Ari Shapiro", 234));
 	
 
 		int chosenOption = 0;
@@ -23,7 +22,7 @@ public class RentAClass {
 			chosenOption = promptOption();
 			switch (chosenOption) {
 				case 1:
-					printAvailableCats();
+					printAvailableCats(cats);
 					break;
 				case 2:
 					chosenCat = promptRentCat(cats);
@@ -35,21 +34,37 @@ public class RentAClass {
 					chosenCustomer = promptCustomer(customers);
 					returnCats(chosenCat, chosenCustomer);
 					break;
-				case 4;
+				case 4:
 					System.out.println("Closing up shop for the day");
 			}
 		}
 	}
 
-	public static int promptRentCat(ArrayList<Cat> cats) {
+	private static void returnCats(Cat chosenCat, Customer chosenCustomer) {
+
+	}
+
+	private static void rentCats(Cat chosenCat, Customer chosenCustomer) {
+
+	}
+
+	private static Customer promptCustomer(ArrayList<Customer> customers) {
+		return null;
+	}
+
+	private static int promptOption() {
+		return 0;
+	}
+
+	public static Cat promptRentCat(ArrayList<Cat> cats) {
 		int desiredCat = 0;
 		while (desiredCat == 0) {
 			System.out.print("Rent which cat? > ");
 			try {
 				desiredCat = Integer.parseInt(input.next());
-				for (givenCat : cats) {
+				for (Cat givenCat : cats) {
 					if (desiredCat == givenCat.getId()) {
-						if (!givenCat.getRented()) {
+						if (!givenCat.isRented()) {
 							return givenCat;
 						} else {
 							System.out.println("Sorry, " + givenCat.getName() + " is not here!");
@@ -61,17 +76,18 @@ public class RentAClass {
 				System.out.println("Invalid Cat ID");
 			}
 		}
+		return null;
 	}
 
-	public int promptReturnCat(ArrayList<Cat> cats) {
+	public static Cat promptReturnCat(ArrayList<Cat> cats) {
 		int desiredCat = 0;
 		while (desiredCat == 0) {
 			System.out.print("Return which cat? > ");
 			try {
 				desiredCat = Integer.parseInt(input.next());
-				for (givenCat : cats) {
+				for (Cat givenCat : cats) {
 					if (desiredCat == givenCat.getId()) {
-						if (givenCat.rented) {
+						if (givenCat.isRented()) {
 							return givenCat;
 						} else {
 							System.out.println(givenCat.getName() + " hasn't been rented!");
@@ -83,12 +99,15 @@ public class RentAClass {
 				System.out.println("Invalid Cat ID");
 			}
 		}
+
+		return null;
+
 	}
 
-	public void printAvailableCats(ArrayList<Cat> cats) {
+	public static void printAvailableCats(ArrayList<Cat> cats) {
 		System.out.println("Cats for Rent");
-		for (givenCat : cats) {
-			if (!givenCat.getRented()) {
+		for (Cat givenCat : cats) {
+			if (!givenCat.isRented()) {
 				System.out.println(givenCat.toString());
 			}
 		}
