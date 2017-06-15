@@ -19,41 +19,44 @@ public class RentACat {
 		Cat chosenCat;
 		Customer chosenCustomer;
 		while (chosenOption != 4) {
-			chosenOption = promptOption();
-			switch (chosenOption) {
-				case 1:
-					printAvailableCats(cats);
-					break;
-				case 2:
-					chosenCat = promptRentCat(cats);
-					chosenCustomer = promptCustomer(customers);
-					rentCats(chosenCat, chosenCustomer);
-					break;
-				case 3:
-					chosenCat = promptReturnCat(cats);
-					chosenCustomer = promptCustomer(customers);
-					returnCats(chosenCat, chosenCustomer);
-					break;
-				case 4:
-					System.out.println("Closing up shop for the day");
+			try {
+				chosenOption = Integer.parseInt(input.next());
+				switch (chosenOption) {
+					case 1:
+						printAvailableCats(cats);
+						break;
+					case 2:
+						chosenCustomer = promptCustomer(customers);
+						chosenCat = promptRentCat(cats);
+						rentCats(chosenCat, chosenCustomer);
+						break;
+					case 3:
+						chosenCat = promptReturnCat(cats);
+						chosenCustomer = promptCustomer(customers);
+						returnCats(chosenCat, chosenCustomer);
+						break;
+					case 4:
+						System.out.println("Closing up shop for the day");
+						break;
+					default:
+						System.out.println("Invalid option");
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid option");
 			}
 		}
 	}
 
-	private static void returnCats(Cat chosenCat, Customer chosenCustomer) {
+	public static void returnCats(Cat chosenCat, Customer chosenCustomer) {
+
+
 
 	}
 
-	private static void rentCats(Cat chosenCat, Customer chosenCustomer) {
+	public static void rentCats(Cat chosenCat, Customer chosenCustomer) {
 
-	}
 
-	private static Customer promptCustomer(ArrayList<Customer> customers) {
-		return null;
-	}
 
-	private static int promptOption() {
-		return 0;
 	}
 
 	public static Cat promptRentCat(ArrayList<Cat> cats) {
@@ -76,7 +79,9 @@ public class RentACat {
 				System.out.println("Invalid Cat ID");
 			}
 		}
-		return null;
+
+		throw new IllegalStateException("Should not get outside prompt loop");
+
 	}
 
 	public static Cat promptReturnCat(ArrayList<Cat> cats) {
@@ -100,7 +105,7 @@ public class RentACat {
 			}
 		}
 
-		return null;
+		throw new IllegalStateException("Should not get outside prompt loop");
 
 	}
 
@@ -113,13 +118,14 @@ public class RentACat {
 		}
 	}
 
-	public Customer promptCustomer(ArrayList<Customer> customers) {
+	public static Customer promptCustomer(ArrayList<Customer> customers) {
+
 		int desiredCustomer = 0;
-		while (customer == 0) {
+		while (desiredCustomer == 0) {
 			System.out.println("Customer ID > ");
 			try {
 				desiredCustomer = Integer.parseInt(input.next());
-				for (givenCustomer : customers) {
+				for (Customer givenCustomer : customers) {
 					if (desiredCustomer == givenCustomer.getId()) {
 						return givenCustomer;
 					}
@@ -129,8 +135,9 @@ public class RentACat {
 				System.out.println("Invalid Customer ID");
 			}
 		}
-	}
-			
 
-		
+		throw new IllegalStateException("Should not get outside prompt loop");
+
+	}
+
 }
