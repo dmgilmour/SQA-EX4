@@ -88,7 +88,9 @@ public class RentAClass {
 	public void printAvailableCats(ArrayList<Cat> cats) {
 		System.out.println("Cats for Rent");
 		for (givenCat : cats) {
-			System.out.println(givenCat.toString());
+			if (!givenCat.getRented()) {
+				System.out.println(givenCat.toString());
+			}
 		}
 	}
 
