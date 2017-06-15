@@ -2,10 +2,10 @@ import java.util.*;
 
 public class Cat {
 
-	private static int id;
-	private static float cost;
-	private static String name;
-	private static boolean rented;
+	private int id;
+	private float cost;
+	private String name;
+	private boolean rented;
 
 	public Cat(int id, float cost, String name) {
 	
@@ -13,6 +13,12 @@ public class Cat {
 		this.cost = cost;
 		this.name = name;
 		rented = false;
+
+	}
+
+	public String toString() {
+
+		return "ID " + id + ". " + name + ": $" + String.format("%.2f", cost) + " / day";
 
 	}
 
