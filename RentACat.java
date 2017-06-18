@@ -107,8 +107,26 @@ public class RentACat {
 
 	}
 
-	public static Identifiable promptObjectLoop(ArrayList<? extends Identifiable> objects, ValidOptionDecider decider, Scanner input, String prompt, String invalid, String error) {
+	public static Identifiable promptObjectLoop(Collection<? extends Identifiable> objects, ValidOptionDecider decider, Scanner input, String prompt, String invalid, String error) {
 
+		if (objects == null) {
+			throw new IllegalArgumentException("Objects must be a valid collection");
+		}
+		if (decider == null) {
+			throw new IllegalArgumentException("Decider must not be null");
+		}
+		if (input == null) {
+			throw new IllegalArgumentException("Input must not be null");
+		}
+		if (prompt == null) {
+			prompt = "Enter a value";
+		}
+		if (invalid == null) {
+			invalid = "Invalid value";
+		}
+		if (error == null) {
+			error = "Invalid value";
+		}
 		int desired = -1;
 		while (desired == -1) {
 			System.out.println(prompt);
