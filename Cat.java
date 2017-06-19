@@ -1,3 +1,4 @@
+
 public class Cat implements Identifiable {
 
 	private int id;
@@ -14,6 +15,21 @@ public class Cat implements Identifiable {
 		rented = false;
 		rentingCustomer = null;
 
+	}
+
+	public void rentCat(Customer rentingCustomer) {
+		setRentingCustomer(rentingCustomer);
+		setRented(true);
+		rentingCustomer.setRentedCat(this);
+		System.out.println(getName() + " has been rented to Customer " + chosenCustomer.getName());
+	}
+
+	public void returnCat() {
+		System.out.println(getRentingCustomer().getName() + " paid $" + getCost());
+		getRentingCustomer.setRentedCat(null);
+		setRentingCustomer(false);
+		setRented(false);
+		System.out.println("Welcome back, " + getName() + "!");
 	}
 
 	public String toString() {
